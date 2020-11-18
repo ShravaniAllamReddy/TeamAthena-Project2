@@ -43,12 +43,12 @@ router.get("/login", function(req, res) {
 
 /**
  * Forum Page - 
- * Notice loading our posts, with that include!
+ * Notice loading our Activities, with that include!
  */
-router.get("/forum", isAuthenticated, function(req, res) {
-  db.Post.findAll({ raw: true, include: [db.User] }) // Joins User to Posts! And scrapes all the seqeulize stuff off
+router.get("/activity", isAuthenticated, function(req, res) {
+  db.Activity.findAll({ raw: true, include: [db.User] }) // Joins User to Activities! And scrapes all the seqeulize stuff off
     .then(dbModel => {
-      res.render("forum", { user: req.user, posts: dbModel });
+      res.render("activity", { user: req.user, activities: dbModel });
     })
     .catch(err => res.status(422).json(err));
 });
