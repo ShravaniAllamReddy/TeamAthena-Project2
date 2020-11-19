@@ -12,34 +12,34 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
             len: [1]
         },
-        // streetAddress: {
-        //     type: DataTypes.STRING,
-        //     allowNull: false,
-        //     validate: {
-        //         len: [1]
-        //     }
-        // },
-        // city: {
-        //     type: DataTypes.STRING,
-        //     allowNull: false,
-        //     validate: {
-        //         len: [1]
-        //     }
-        // },
-        // state: {
-        //     type: DataTypes.STRING,
-        //     allowNull: false,
-        //     validate: {
-        //         len: [1]
-        //     }
-        // },
-        // zipcode: {
-        //     type: DataTypes.STRING,
-        //     allowNull: false,
-        //     validate: {
-        //         len: [5,5]
-        //     }
-        // }
+        street: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [1]
+            }
+        },
+        city: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [1]
+            }
+        },
+        state: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [1]
+            }
+        },
+        zip: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [5,5]
+            }
+        }
 
     });
 
