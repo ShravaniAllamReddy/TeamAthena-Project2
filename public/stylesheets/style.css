@@ -15,3 +15,9 @@ footer {
   text-align: center;
   background-color: black;
 }
+
+#map {
+  height: 400px;
+  width: 100%;
+  background-color: grey;
+}

@@ -9,18 +9,61 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md">
+        <div class="col-md-4">
             <legend>Fun things to do</legend>
+
             <div id="activities">
                 {{#each activities}}
                 <div class="activities-post-card card text-white bg-primary mb-3">
                     <div class="card-header">
                         <h4 class="text-white">{{name}}</h4>
                     </div>
-                    <div class="card-body">
+                    <button class="button">Show/Hide</button>
+                    <div class="card-body hidden">
                         <p class="card-text">{{description}}</p>
+
+                        <p class="card-text">{{street}}</p>
+
+                        <p class="card-text">{{state}}</p>
+
+                        <p class="card-text">{{city}}</p>
+
+                        <p class="card-text">{{zip}}</p>
                         by {{'User.email'}}
                         @ {{createdAt}}
+                    </div>
+
+
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div id="map"></div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <form class="activity-post">
+                <fieldset>
+                    <legend>Create Your Own Activity</legend>
+                    <p>
+                        Type in your Activity name, description and url reference to the activity below, and click
+                        submit to send it to our database. We will
+                        register it with your email address, and display it above with everyone else's activities!</p>
+                    </p>
+                    <div class="form-group">
+                        <label for="title-input">Name</label>
+                        <input type="text" class="form-control" id="title-input" aria-describedby="postHelp"
+                            placeholder="Enter your activity name">
+                        <small id="postHelp" class="form-text text-muted">This'l be shared!</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="body-input">Description</label>
+                        <textarea class="form-control" id="body-input" name="body"
+                            placeholder="Enter description"></textarea>
                     </div>
                     <div class="form-group">
                         <!-- Street 1 -->
@@ -132,21 +175,74 @@
                         <label for="url-input">URL</label>
                         <input type="text" id="url-input" aria-describedby="postHelp" placeholder="Enter Activity URL">
                     </div>
+
                     <button type="submit" class="btn btn-primary">Post!</button>
                 </fieldset>
             </form>
             <br />
         </div>
+
     </div>
 </div>
+<script src="https://www.gstatic.com/firebasejs/5.8.6/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.6/firebase-database.js"></script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDq70sJV45glTCIzAG9zL_ookT7DaKmP8&callback=initMap"></script>
+<script>
+    // Initialize and add the map
+    function initMap() {
+        var center = { lat: 34.052235, lng: -118.243683 };
+        var locations = [
+            ['Philz Coffee<br>\
+    801 S Hope St A, Los Angeles, CA 90017<br>\
+   <a href="https://goo.gl/maps/L8ETMBt7cRA2">Get Directions</a>', 34.046438, -118.259653],
+            ['Philz Coffee<br>\
+    525 Santa Monica Blvd, Santa Monica, CA 90401<br>\
+   <a href="https://goo.gl/maps/PY1abQhuW9C2">Get Directions</a>', 34.017951, -118.493567],
+            ['Philz Coffee<br>\
+    146 South Lake Avenue #106, At Shoppers Lane, Pasadena, CA 91101<br>\
+    <a href="https://goo.gl/maps/eUmyNuMyYNN2">Get Directions</a>', 34.143073, -118.132040],
+            ['Philz Coffee<br>\
+    21016 Pacific Coast Hwy, Huntington Beach, CA 92648<br>\
+    <a href="https://goo.gl/maps/Cp2TZoeGCXw">Get Directions</a>', 33.655199, -117.998640],
+            ['Philz Coffee<br>\
+    252 S Brand Blvd, Glendale, CA 91204<br>\
+   <a href="https://goo.gl/maps/WDr2ef3ccVz">Get Directions</a>', 34.142823, -118.254569]
+        ];
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 9,
+            center: center
+        });
+        var infowindow = new google.maps.InfoWindow({});
+        var marker, count;
+        for (count = 0; count < locations.length; count++) {
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(locations[count][1], locations[count][2]),
+                map: map,
+                title: locations[count][0]
+            });
+            google.maps.event.addListener(marker, 'click', (function (marker, count) {
+                return function () {
+                    infowindow.setContent(locations[count][0]);
+                    infowindow.open(map, marker);
+                }
+            })(marker, count));
+        }
+    }
 
+</script>
 <script>
     $(document).ready(function () {
         // Getting references to our form and inputs
+
         const postForm = $("form.activities");
+
         const titleInput = $("input#title-input");
         const bodyInput = $("textarea#body-input");
-        const urlInput = $("input#url-input")
+        const streetInput = $("input#street_id");
+        const stateInput = $("select#state_id");
+        const cityInput = $("input#city_id");
+        const zipInput = $("input#zip_id");
 
         // When the form is submitted, we validate there's a title and body entered
         postForm.on("submit", function (event) {
@@ -155,27 +251,39 @@
             var postData = {
                 name: titleInput.val().trim(),
                 description: bodyInput.val().trim(),
-                url: urlInput.val().trim()
+                street: streetInput.val().trim(),
+                state: stateInput.val().trim(),
+                city: cityInput.val().trim(),
+                zip: zipInput.val().trim()
             };
 
-            if (!postData.name || !postData.description || !postData.url) {
+            if (!postData.name || !postData.description || !postData.street || !postData.state ||
+                !postData.city || !postData.zip) {
                 return;
             }
 
 
             // If we have a title and password  we run the sendPost function and clear the form
-            sendPost(postData.name, postData.description, postData.url);
+            sendPost(postData.name, postData.description, postData.street, postData.state, postData.city, postData.zip);
             titleInput.val("");
             bodyInput.val("");
-            urlInput.val("");
+            streetInput.val("");
+            stateInput.val("");
+            cityInput.val("");
+            zipInput.val("");
+
         });
 
         // sendPost does a post to our "api/posts" route and if successful, redirects us the the activities page
         function sendPost(name, description, url) {
+
             $.post("/api/activities", {
                 name: name,
                 description: description,
-                url: url
+                street: street,
+                state: state,
+                city: city,
+                zip: zip
             })
                 .then(function () {
                     window.location.replace("/activity");
@@ -186,5 +294,10 @@
                 });
 
         }
+
+
+        $('.button').on('click', function (e) {
+            $('.hidden').toggle();
+        });
     })
 </script>
