@@ -1,3 +1,10 @@
+.jumbotron {
+  background-image: url("backgroundpic.jpg");
+}
+.display-6 {
+  color: red
+}
+
 form.signup,
 form.login {
   margin-top: 50px;
@@ -15,3 +22,4 @@ footer {
   text-align: center;
   background-color: black;
 }
+
