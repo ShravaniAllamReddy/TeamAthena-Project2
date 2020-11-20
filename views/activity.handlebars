@@ -32,8 +32,6 @@
                         by {{'User.email'}}
                         @ {{createdAt}}
                     </div>
-
-
                 </div>
                 {{/each}}
             </div>
@@ -46,7 +44,7 @@
 
     <div class="row">
         <div class="col-md-4">
-            <form class="activity-post">
+            <form class="activities">
                 <fieldset>
                     <legend>Create Your Own Activity</legend>
                     <p>
@@ -141,48 +139,15 @@
                         <label for="zip_id" class="control-label">Zip Code</label>
                         <input type="text" class="form-control" id="zip_id" name="zip" placeholder="#####">
                     </div>
-
-                </div>
-                {{/each}}
-            </div>
-        </div>
-
-
-    </div>
-
-    <div class="row">
-        <div class="col-md">
-            <form class="activities">
-                <fieldset>
-                    <legend>Create Your Own Activity</legend>
-                    <p>
-                        Type in your Activity name, description and url reference to the activity below, and click
-                        submit to send it to our database. We will
-                        register it with your email address, and display it above with everyone else's activities!</p>
-                    </p>
-                    <div class="form-group">
-                        <label for="title-input">Name</label>
-                        <input type="text" class="form-control" id="title-input" aria-describedby="postHelp"
-                            placeholder="Enter your activity name">
-                        <small id="postHelp" class="form-text text-muted">This'l be shared!</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="body-input">Description</label>
-                        <textarea class="form-control" id="body-input" name="body"
-                            placeholder="Enter your post body"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="url-input">URL</label>
-                        <input type="text" id="url-input" aria-describedby="postHelp" placeholder="Enter Activity URL">
-                    </div>
-
                     <button type="submit" class="btn btn-primary">Post!</button>
                 </fieldset>
             </form>
             <br />
         </div>
-
     </div>
+</div>
+
+</div>
 </div>
 <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase-database.js"></script>
@@ -247,7 +212,7 @@
         // When the form is submitted, we validate there's a title and body entered
         postForm.on("submit", function (event) {
             event.preventDefault();
-            console.log(bodyInput.val(), titleInput.val())
+           
             var postData = {
                 name: titleInput.val().trim(),
                 description: bodyInput.val().trim(),
@@ -275,7 +240,7 @@
         });
 
         // sendPost does a post to our "api/posts" route and if successful, redirects us the the activities page
-        function sendPost(name, description, url) {
+        function sendPost(name, description, street, city, zip) {
 
             $.post("/api/activities", {
                 name: name,
