@@ -60,6 +60,15 @@ router.get("/user",isAuthenticated, function(req, res) {
   
 });
 
+
+
+router.get("/current", isAuthenticated, function(req, res) {
+  db.Activity.findAll({ raw: true, include: [db.User] }) // Joins User to Activities! And scrapes all the seqeulize stuff off
+    .then(dbModel => {
+      res.render("current", { user: req.user, activities: dbModel });
+    })
+    .catch(err => res.status(422).json(err));
+});
 /**
  * Generic Error Page
  */
