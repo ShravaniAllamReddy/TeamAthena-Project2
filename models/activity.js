@@ -1,3 +1,5 @@
+const user = require("./user");
+
 module.exports = function (sequelize, DataTypes) {
     var Activity = sequelize.define("Activity", {
         name: {
@@ -49,6 +51,7 @@ module.exports = function (sequelize, DataTypes) {
         Activity.belongsTo(models.User, {
             foreignKey: {
                 allowNull: false
+                
             }
         });
     };
