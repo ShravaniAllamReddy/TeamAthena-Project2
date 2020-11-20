@@ -13,7 +13,7 @@
     </div>
     <div class="row">
         <div class="col-md">
-            <legend>Fun things to do</legend>
+            <legend>About {{user.email}}</legend>
             <div id="activities">
                 {{#each activities}}
                 <div class="activity-post-card card text-white bg-primary mb-3">
@@ -42,38 +42,7 @@
 
     </div>
 
-    <div class="row">
-        <div class="col-md">
-            <form class="activities">
-                <fieldset>
-                    <legend>Create Your Own Activity</legend>
-                    <p>
-                        Type in your Activity name, description and url reference to the activity below, and click
-                        submit to send it to our database. We will
-                        register it with your email address, and display it above with everyone else's activities!</p>
-                    </p>
-                    <div class="form-group">
-                        <label for="title-input">Name</label>
-                        <input type="text" class="form-control" id="title-input" aria-describedby="postHelp"
-                            placeholder="Enter your activity name">
-                        <small id="postHelp" class="form-text text-muted">This'l be shared!</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="body-input">Description</label>
-                        <textarea class="form-control" id="body-input" name="body"
-                            placeholder="Enter your post body"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="url-input">URL</label>
-                        <input type="text" id="url-input" aria-describedby="postHelp" placeholder="Enter Activity URL">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Post!</button>
-                </fieldset>
-            </form>
-            <br />
-        </div>
-    </div>
-</div>
+    
 
 <script>
     $(document).ready(function () {
