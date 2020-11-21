@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md">
             <div class="jumbotron">
-                <h4 class="display-6">Hello, {{user.email}}!</h4>
+                <h4 class="display-6">Hello, {{user.firstname}}!</h4>
             </div>
         </div>
     </div>
@@ -29,6 +29,7 @@
                         <p class="card-text">{{city}}</p>
 
                         <p class="card-text">{{zip}}</p>
+                        <br>
                         by {{'User.email'}}
                         @ {{createdAt}}
                     </div>
@@ -44,14 +45,14 @@
 
     </div>
 
-    
 
 
-    </div>
 
-    
+</div>
 
-    </div>
+
+
+</div>
 </div>
 <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase-database.js"></script>
