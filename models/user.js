@@ -20,22 +20,32 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.STRING,
         allowNull: false
       },
-      // username: {
-      //   type: DataTypes.STRING,
-      //   defaultValue: 'Anonymous',
-      //   allowNull: false
-      // },
-      // gender: {
-      //   type: DataTypes.STRING,
-      //   allowNull: false
-      // },
-      // phone: {
-      //   allowNull: false,
-      //   type: DataTypes.STRING,
-      //   validate: {
-      //     not: ['[a-z]', 'i']
-      //   }
-      
+      firstname: {
+        type: DataTypes.STRING,
+        defaultValue: 'Anonymous',
+        allowNull: false
+      },
+      lastname: {
+        type: DataTypes.STRING,
+        defaultValue: 'Anonymous',
+        allowNull: false
+      },
+      gender: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      age: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      phone: {
+        allowNull: false,
+        type: DataTypes.STRING,
+        validate: {
+          not: ['[a-z]', 'i']
+        }
+      }
+
     },
 
     {

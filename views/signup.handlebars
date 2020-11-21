@@ -1,87 +1,116 @@
- {{> navbar user}}
+{{> navbar user}}
 
-<div class="container">  
-    <div class="row">
+<div class="container">
+  <div class="row">
     <div class="col-md">
       <div class="jumbotron">
         <h4 class="display-6">Signup Form</h4>
       </div>
     </div>
   </div>
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <form class="signup">
-                <div class="form-group">
-                    <label for="email-input">Email address</label>
-                    <input type="email" class="form-control" id="email-input" name="email" placeholder="Email">
-                </div>
-                <div class="form-group">
-                    <label for="password-input">Password</label>
-                    <input type="password" class="form-control" id="password-input" name="password" placeholder="Password">
-                </div>
-                <div class="form-group">
-                    <label for="password-input">Name</label>
-                    <input type="name" class="form-control" id="password-input" name="password" placeholder="Name">
-                </div>
-                <div class="form-group">
-                    <label for="password-input">Gender</label>
-                    <input type="gender" class="form-control" id="password-input" name="password" placeholder="Gender">
-                </div>
-                <div class="form-group">
-                    <label for="password-input">Phone</label>
-                    <input type="phone" class="form-control" id="password-input" name="password" placeholder="Phone Number">
-                </div>
-                <div style="display: none" id="alert" class="alert alert-danger" role="alert">
-                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                    <span class="sr-only">Error:</span> <span class="msg"></span>
-                </div>
-                <button type="submit" class="btn btn-primary">Sign Up</button>
-            </form>
-            <br />
-            <p>Or log in <a href="/login">here</a></p>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <form class="signup">
+        <div class="form-group">
+          <label for="email-input">Email address</label>
+          <input type="email" class="form-control" id="email-input" name="email" placeholder="Email">
         </div>
+        <div class="form-group">
+          <label for="password-input">Password</label>
+          <input type="password" class="form-control" id="password-input" name="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <label for="password-input">First Name</label>
+          <input type="firstname" class="form-control" id="firstname" name="firstname" placeholder="First Name">
+        </div>
+        <div class="form-group">
+          <label for="password-input">Last Name</label>
+          <input type="lastname" class="form-control" id="lastname" name="lastname" placeholder="Last Name">
+        </div>
+        <div class="form-group">
+          <label for="password-input">Gender</label>
+          <input type="gender" class="form-control" id="gender" name="gender" placeholder="Gender">
+        </div>
+        <div class="form-group">
+          <label for="password-input">Age</label>
+          <input type="age" class="form-control" id="age" name="age" placeholder="Age">
+        </div>
+        <div class="form-group">
+          <label for="password-input">Phone</label>
+          <input type="phone" class="form-control" id="phone" name="phone" placeholder="Phone Number">
+        </div>
+        <div style="display: none" id="alert" class="alert alert-danger" role="alert">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span> <span class="msg"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+      </form>
+      <br />
+      <p>Or log in <a href="/login">here</a></p>
     </div>
+  </div>
 </div>
 
 <script>
-$(document).ready(function() {
-  // Getting references to our form and inputs
-  var signupForm = $("form.signup");
-  var emailInput = $("input#email-input");
-  var passwordInput = $("input#password-input");
+  $(document).ready(function () {
+    // Getting references to our form and inputs
+    var signupForm = $("form.signup");
+    var emailInput = $("input#email-input");
+    var passwordInput = $("input#password-input");
+    var firstnameInput = $("input#firstname");
+    var lastnameInput = $("input#lastname");
+    var genderInput = $("input#gender");
+    var ageInput = $("input#age");
+    var phoneInput = $("input#phone");
 
-  // When the form is submitted, we validate there's an email and password entered
-  signupForm.on("submit", function(event) {
-    event.preventDefault();
-    var userData = {
-      email: emailInput.val().trim(),
-      password: passwordInput.val().trim()
-    };
+    // When the form is submitted, we validate there's an email and password entered
+    signupForm.on("submit", function (event) {
+      event.preventDefault();
+      var userData = {
+        email: emailInput.val().trim(),
+        password: passwordInput.val().trim(),
+        firstname: firstnameInput.val().trim(),
+        lastname: lastnameInput.val().trim(),
+        gender: genderInput.val().trim(),
+        age: ageInput.val().trim(),
+        phone: phoneInput.val().trim()
+      };
 
-    if (!userData.email || !userData.password) {
-      return;
-    }
+      if (!userData.email || !userData.password || !userData.firstname || !userData.lastname || !userData.gender || !userData.age || !userData.phone) {
+        return;
+      }
 
-    // If we have an email and password we run the signUp function and clear the form
-    signupUser(userData.email, userData.password);
-    emailInput.val("");
-    passwordInput.val("");
-  });
+      // If we have an email and password we run the signUp function and clear the form
+      signupUser(userData.email, userData.password, userData.firstname, userData.lastname, userData.gender, userData.age, userData.phone);
+      emailInput.val("");
+      passwordInput.val("");
+      firstnameInput.val("");
+      lastnameInput.val("");
+      genderInput.val("");
+      ageInput.val("");
+      phoneInput.val("");
+    });
 
-  // signUp does a post to our "auth/login" route and if successful, redirects us the the members page
-  function signupUser(email, password) {
-    $.post("/auth/signup", {
-      email: email,
-      password: password
-    })
-      .then(function() {
+    // signUp does a post to our "auth/login" route and if successful, redirects us the the members page
+    function signupUser(email, password, firstname, lastname, gender, age, phone) {
+      $.post("/auth/signup", {
+        email: email,
+        password: password,
+        firstname: firstname,
+        lastname: lastname,
+        gender: gender,
+        age: age,
+        phone: phone
 
-        window.location.replace("/user");
-        // If there's an error, log the error
       })
-      .catch(function(err) {
-        console.log(err);
-      });
-  }
-});
+        .then(function () {
+
+          window.location.replace("/user");
+          // If there's an error, log the error
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+    }
+  });
 </script>
