@@ -1,94 +1,36 @@
 {{> navbar user}}
 
-<h2>THIS IS THE FUTURE USER PAGE!!!!!!</h2>
-<h3>We want this to show information about the user, the name, the gender, the age, contact information such as ph num and current activity(or most recent activity)</h3>
-<h4>and maybe a user image</h4>
+
 <div class="container">
     <div class="row">
         <div class="col-md">
             <div class="jumbotron">
-                <h4 class="display-6">Hello, {{user.email}}!</h4>
+                <h4 class="display-5 text-center" >Hello, {{user.firstname}}!</h4>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md">
-            <legend>About {{user.email}}</legend>
-            <div id="activities">
-                {{#each activities}}
-                <div class="activity-post-card card text-white bg-primary mb-3">
-                    <div class="card-header">
-                        <h4 class="text-white">{{name}}</h4>
-                    </div>
+           
+            <div id="users">
+              
+                <div class="card mb-3">
+                   
                     <div class="card-body">
-                        <p class="card-text">{{description}}</p>
-                        by {{'User.email'}}
-                        @ {{createdAt}}
-                    </div>
+                        <p class="card-text">Contact Number: {{user.phone}}</p>
+                        <p class="card-text">Email : {{user.email}}</p>
+                        <p class="card-text">Age : {{user.age}}</p>
+                        <p class="card-text">Gender: {{user.gender}}</p>
                     
-                    
-
-                    <div class="form-group">
-                        <!-- Zip Code-->
-                        <label for="zip_id" class="control-label">Zip Code</label>
-                        <input type="text" class="form-control" id="zip_id" name="zip" placeholder="#####">
+                        <br>
+                        @ {{user.createdAt}}
                     </div>
 
                 </div>
-                {{/each}}
+               
             </div>
         </div>
 
 
     </div>
-
-    
-
-<script>
-    $(document).ready(function () {
-        // Getting references to our form and inputs
-        const postForm = $("form.activities");
-        const titleInput = $("input#title-input");
-        const bodyInput = $("textarea#body-input");
-        const urlInput = $("input#url-input")
-
-        // When the form is submitted, we validate there's a title and body entered
-        postForm.on("submit", function (event) {
-            event.preventDefault();
-            console.log(bodyInput.val(), titleInput.val())
-            var postData = {
-                name: titleInput.val().trim(),
-                description: bodyInput.val().trim(),
-                url: urlInput.val().trim()
-            };
-
-            if (!postData.name || !postData.description || !postData.url) {
-                return;
-            }
-
-
-            // If we have a title and password  we run the sendPost function and clear the form
-            sendPost(postData.name, postData.description, postData.url);
-            titleInput.val("");
-            bodyInput.val("");
-            urlInput.val("");
-        });
-
-        // sendPost does a post to our "api/posts" route and if successful, redirects us the the activity page
-        function sendPost(name, description, url) {
-            $.post("/api/activities", {
-                name: name,
-                description: description,
-                url: url
-            })
-                .then(function () {
-                    window.location.replace("/activity");
-                    // If there's an error, log the error
-                })
-                .catch(function (err) {
-                    console.log(err);
-                });
-
-        }
-    })
-</script>
+</div>
