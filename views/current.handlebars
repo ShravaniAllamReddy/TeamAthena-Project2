@@ -1,13 +1,14 @@
 {{> navbar user}}
 
-<div class="container">
+{{!-- <div class="container">
     <div class="row">
         <div class="col-md">
             <div class="jumbotron">
                 <h4 class="display-6">Hello, {{user.firstname}}!</h4>
             </div>
-        </div>
-    </div>
+        </div> --}}
+
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-4">
             <legend>Fun things to do</legend>
@@ -40,7 +41,8 @@
                 {{/each}}
             </div>
         </div>
-        <div class="col-md-8">
+
+        <div class="col-lg-8 mt-5">
             <div id="map"></div>
         </div>
 
@@ -66,7 +68,7 @@
 
     // Initialize and add the map
     function initMap() {
-        var center = {lat: 41.8781, lng: -87.6298};
+        var center = { lat: 41.8781, lng: -87.6298 };
         $.ajax({
             url: "http://localhost:8080/api/activities",
             method: "GET"
@@ -83,7 +85,7 @@
                 activityArray.push(activity.lon);
                 locations.push(activityArray)
             })
-           
+
             var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 9,
                 center: center
