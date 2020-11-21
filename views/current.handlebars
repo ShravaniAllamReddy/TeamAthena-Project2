@@ -60,9 +60,20 @@
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDq70sJV45glTCIzAG9zL_ookT7DaKmP8&callback=initMap"></script>
 <script>
+
+let geoAPIKey = "93d3ded8310f4bcd0816861f0428d0f8";
+
+
     // Initialize and add the map
     function initMap() {
+        $.ajax({
+        url: "http://localhost:8080/api/activities",
+        method: "GET"
+    }).then(function (activityresponse) {
+        console.log(activityresponse);
+        var zip
         var center = { lat: 34.052235, lng: -118.243683 };
+        getLocation(center);
         var locations = [
             ['Philz Coffee<br>\
     801 S Hope St A, Los Angeles, CA 90017<br>\
@@ -99,7 +110,36 @@
                 }
             })(marker, count));
         }
+    })
     }
+
+ function getLocation(zip) {
+
+    let geoURL = "https://api.openweathermap.org/data/2.5/weather?zip=" + zip +",us&appid=93d3ded8310f4bcd0816861f0428d0f8";
+    console.log(geoURL),
+    $.ajax({
+        url: geoURL,
+        method: "GET"
+    }).then(function (georesponse) {
+        console.log("GEO", georesponse);
+        getExchangeRate(georesponse.city.country);
+
+        // variable to store latitude
+        latitude = georesponse.city.coord.lat;
+
+        // variable to store longitude 
+        longitude = georesponse.city.coord.lon;
+
+
+        let place = "https://www.google.com/maps/embed/v1/streetview?key=" + googleMapsAPIKey + "&location=" + latitude + "," + longitude + "&heading=210&pitch=0&fov=100"
+
+        $("iframe").attr("src", place);
+        console.log(place)
+
+    });
+    
+};
+getLocation();
 
 </script>
 <script>

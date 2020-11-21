@@ -41,6 +41,14 @@ module.exports = function (sequelize, DataTypes) {
             validate: {
                 len: [5,5]
             }
+        },
+        lat: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        lon: {
+            type: DataTypes.STRING,
+            allowNull: false,
         }
 
     });
