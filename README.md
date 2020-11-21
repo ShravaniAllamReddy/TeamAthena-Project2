@@ -18,19 +18,19 @@ A simple app for bored friends to find activities together using node.js, MySQL,
 ### How to get started
 
 ### Login Page
-![screenshots](screenshot1.png)
+![screenshots](./screenshots/screenshot1.png)
 
 ### Signup Page
-![screenshots](screenshot2.png)
+![screenshots](./screenshots/screenshot2.png)
 
 ### Profile Page
-![screenshots](screenshot3.png)
+![screenshots](./screenshots/screenshot3.png)
 
 ### Creat your own activity
-![screenshots](screenshot4.png)
+![screenshots](./screenshots/screenshot4.png)
 
 ### Find other activities
-![screenshots](screenshot5.png)
+![screenshots](./screenshots/screenshot5.png)
 
 
 ## Technologies
