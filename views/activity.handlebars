@@ -2,42 +2,27 @@
 
 
 <div class="row">
-    <div class="col-md-4">
-        
-    </div>
-    <div class="col-md-4">
+   
+   <div class="col-md-8 col-md-offset-3 activity mt-5 wow animate__lightSpeedInLeft" data-wow-duration="2s" data-wow-delay="1s"> 
         <form class="activities">
             <fieldset>
-                <legend>Create Your Own Activity</legend>
-                <p>
+                <legend style="font-weight:bold;">Create Your Own Activity</legend>
+                <p style="color:black;font-size:medium">
                     Type in your Activity name, description and address to the activity below, and click
                     submit to send it to our database. We will
                     register it with your email address, and display it above with everyone else's activities!</p>
                 </p>
                 <div class="form-group">
-                    <label for="title-input">Name</label>
+                    <label class="control-label color" for="title-input">Name</label>
                     <input type="text" class="form-control" id="title-input" aria-describedby="postHelp"
                         placeholder="Enter your activity name">
-                    <small id="postHelp" class="form-text text-muted">This'l be shared!</small>
+                    <small id="postHelp" class="form-text">This will be shared!</small>
                 </div>
 
 
                 <div class="form-group">
-                    <label for="acitvity" class="control-label">Activities</label>
-                    <select class="form-control" id="activity_id">
-                        <option value="games" class="far fa-hand-scissors">Games</option>
-                        <option value="food" class="fas fa-utensils">Get Food</option>
-                        <option value="music" class="fas fa-music">Concerts</option>
-                        <option value="walk" class="fas fa-walking">Go for a walk</option>
-                        <option value="hiking" class="fas fa-hiking">Hiking</option>
-                        <option value="Sports" class="fas fa-bowling-ball">Sports</option>
-                        <option value="coffee" class="fas fa-coffee">Get Coffee</option>
 
-                    </select>
-                </div>
-                <div class="form-group">
-
-                    <label for="body-input">Description</label>
+                    <label class="control-label color" for="body-input">Description</label>
                     <textarea class="form-control" id="body-input" name="body"
                         placeholder="Enter description"></textarea>
 
@@ -45,20 +30,20 @@
 
                 <div class="form-group">
                     <!-- Street 1 -->
-                    <label for="street_id" class="control-label">Street Address </label>
+                    <label for="street_id" class="control-label color">Street Address </label>
                     <input type="text" class="form-control" id="street_id" name="street"
                         placeholder="Apartment, suite, unit, building, floor, etc.">
                 </div>
 
                 <div class="form-group">
                     <!-- City-->
-                    <label for="city_id" class="control-label">City</label>
+                    <label for="city_id" class="control-label color">City</label>
                     <input type="text" class="form-control" id="city_id" name="city" placeholder="Smallville">
                 </div>
 
                 <div class="form-group">
                     <!-- State Button -->
-                    <label for="state_id" class="control-label">State</label>
+                    <label class="color" for="state_id" class="control-label color">State</label>
                     <select class="form-control" id="state_id">
                         <option value="AL">Alabama</option>
                         <option value="AK">Alaska</option>
@@ -116,19 +101,18 @@
 
                 <div class="form-group">
                     <!-- Zip Code-->
-                    <label for="zip_id" class="control-label">Zip Code</label>
+                    <label for="zip_id" class="control-label color">Zip Code</label>
                     <input type="text" class="form-control" id="zip_id" name="zip" placeholder="#####">
                 </div>
                 <button type="submit" class="btn btn-primary">Post!</button>
             </fieldset>
         </form>
-        <br />
-
-
+    
     </div>
 </div>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
+<script>new WOW().init()</script>
 <script>
     $(document).ready(function () {
         // Getting references to our form and inputs

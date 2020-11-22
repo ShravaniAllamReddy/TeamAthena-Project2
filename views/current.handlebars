@@ -1,72 +1,51 @@
 {{> navbar user}}
 
-<div class="container">
-    <div class="row">
-        <div class="col-md">
-            <div class="jumbotron">
-                <h4 class="display-6">Hello, {{user.firstname}}!</h4>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            <legend>Fun things to do</legend>
+<div class="container-fluid">
+<div id="ml" style="color: rgb(18, 2, 119);">
+     <h2>Hello {{user.firstname}} </h2>
+</div>
+    <div class="row mt-5">
+        <div class="col-md-4 col-lg-4 col-sm-8">
 
-            <div id="activities">
+            <div id="activities" class="activity">
+                <legend class="display-5" style="color: rgb(80, 28, 122);font-weight:bold">Fun things to do</legend>
                 {{#each activities}}
-                <div class="activities-card card text-white bg-primary mb-3">
-                    <div class="card-header">
-                        <h4 class="text-white">{{name}}</h4>
+
+                <div class="activities-card mt-3">
+
+                    <h4 style="color: rgb(55, 2, 77);font-size:large">{{name}}</h4>
+                    {{description}}
+
+                    <div>
+                        <h5 style="font-weight: bold;">Location:</h5>
+                        <p>{{street}}, {{state}}, {{city}}, {{zip}}</p>
 
                     </div>
-                    <button class="button">Show/Hide</button>
-                    <div class="card-body hidden">
-                        <p class="card-text">{{description}}</p>
-
-                        <p class="card-text">{{street}}</p>
-
-                        <p class="card-text">{{state}}</p>
-
-                        <p class="card-text">{{city}}</p>
-
-                        <p class="card-text">{{zip}}</p>
-                        <br>
-                        by {{'User.email'}}
-                        @ {{createdAt}}
-                    </div>
-
-
+                    by {{'User.firstname'}}
+                    @ {{createdAt}}
                 </div>
                 {{/each}}
+
             </div>
+
         </div>
         <div class="col-md-8">
             <div id="map"></div>
         </div>
-
     </div>
 
 
-
-
 </div>
 
 
-
-</div>
-</div>
-<script src="https://www.gstatic.com/firebasejs/5.8.6/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.8.6/firebase-database.js"></script>
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDq70sJV45glTCIzAG9zL_ookT7DaKmP8&callback=initMap"></script>
 <script>
 
     let geoAPIKey = "93d3ded8310f4bcd0816861f0428d0f8";
-
-
     // Initialize and add the map
     function initMap() {
-        var center = {lat: 41.8781, lng: -87.6298};
+        var center = { lat: 41.8781, lng: -87.6298 };
         $.ajax({
             url: "http://localhost:8080/api/activities",
             method: "GET"
@@ -83,7 +62,7 @@
                 activityArray.push(activity.lon);
                 locations.push(activityArray)
             })
-           
+
             var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 9,
                 center: center

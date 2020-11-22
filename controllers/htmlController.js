@@ -53,13 +53,12 @@ router.get("/activity", isAuthenticated, function(req, res) {
     .catch(err => res.status(422).json(err));
 });
 
-
+// to get the user profile information
 router.get("/user",isAuthenticated, function(req, res) {
   
     res.render("user", { user: req.user });
   
 });
-
 
 
 router.get("/current", isAuthenticated, function(req, res) {
