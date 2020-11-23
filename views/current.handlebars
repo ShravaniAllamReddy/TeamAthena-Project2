@@ -1,9 +1,9 @@
 {{> navbar user}}
 
 <div class="container-fluid">
-<div id="ml" style="color: rgb(18, 2, 119);">
-     <h2>Hello {{user.firstname}} </h2>
-</div>
+    <div id="ml" style="color: rgb(18, 2, 119);">
+        <h2>Hello {{user.firstname}} </h2>
+    </div>
     <div class="row mt-5">
         <div class="col-md-4 col-lg-4 col-sm-8">
 
@@ -30,7 +30,9 @@
 
         </div>
         <div class="col-md-8">
-            <div id="map"></div>
+            <div id="map">
+
+            </div>
         </div>
     </div>
 
@@ -44,8 +46,8 @@
 
     let geoAPIKey = "93d3ded8310f4bcd0816861f0428d0f8";
     // Initialize and add the map
-    function initMap() {
-        var center = { lat: 41.8781, lng: -87.6298 };
+     function initMap() {
+        var center = {lat: 41.8781, lng: -87.6298};
         $.ajax({
             url: "http://localhost:8080/api/activities",
             method: "GET"
@@ -62,7 +64,7 @@
                 activityArray.push(activity.lon);
                 locations.push(activityArray)
             })
-
+           
             var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 9,
                 center: center
@@ -85,75 +87,4 @@
         })
     };
 
-
-</script>
-<script>
-    $(document).ready(function () {
-        // Getting references to our form and inputs
-
-        const postForm = $("form.activities");
-
-        const titleInput = $("input#title-input");
-        const bodyInput = $("textarea#body-input");
-        const streetInput = $("input#street_id");
-        const stateInput = $("select#state_id");
-        const cityInput = $("input#city_id");
-        const zipInput = $("input#zip_id");
-
-        // When the form is submitted, we validate there's a title and body entered
-        postForm.on("submit", function (event) {
-            event.preventDefault();
-            console.log(bodyInput.val(), titleInput.val())
-            var postData = {
-                name: titleInput.val().trim(),
-                description: bodyInput.val().trim(),
-                street: streetInput.val().trim(),
-                state: stateInput.val().trim(),
-                city: cityInput.val().trim(),
-                zip: zipInput.val().trim()
-            };
-
-            if (!postData.name || !postData.description || !postData.street || !postData.state ||
-                !postData.city || !postData.zip) {
-                return;
-            }
-
-
-            // If we have a title and password  we run the sendPost function and clear the form
-            sendPost(postData.name, postData.description, postData.street, postData.state, postData.city, postData.zip);
-            titleInput.val("");
-            bodyInput.val("");
-            streetInput.val("");
-            stateInput.val("");
-            cityInput.val("");
-            zipInput.val("");
-
-        });
-
-        // sendPost does a post to our "api/posts" route and if successful, redirects us the the activities page
-        function sendPost(name, description, url) {
-
-            $.post("/api/activities", {
-                name: name,
-                description: description,
-                street: street,
-                state: state,
-                city: city,
-                zip: zip
-            })
-                .then(function () {
-                    window.location.replace("/activity");
-                    // If there's an error, log the error
-                })
-                .catch(function (err) {
-                    console.log(err);
-                });
-
-        }
-
-
-        $('.button').on('click', function (e) {
-            $('.hidden').toggle();
-        });
-    })
 </script>
