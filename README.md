@@ -42,6 +42,26 @@ Project is created with:
 - Passport
 - Passport-Local
 - Cypress
+ 
+## Routing
+
+Api-routes: It  requires models and passport as we have configured it and it consists of all CRUD routes which gets the data, creates new data, updates the data and deletes the  data from the MYSQL database.
+
+
+* GET  '/api/activities' : This gets all the activities created by different users in json format
+* POST '/api/activities' : This posts user's activity, i.e., adds to the database.
+* GET '/api/users' : This gets all the users information in json format
+* POST '/api/users' : This posts users information.
+
+
+Html-routes : It requires a path so we use relative routes to html files.It also requires custom middleware for checking if a user is logged in.
+
+* GET '/' : This routes to login html page
+* GET '/login' : This routes to login html page 
+* GET 'signup' : This routes to signup html page
+* GET '/activity' : This routes to page where you can create a new activity
+* GET '/current' : This routess to all the activities posted by different users
+
 
 ## Setup
 To setup this project, install it locally using npm.
