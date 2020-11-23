@@ -1,6 +1,8 @@
 const db = require("../../models");
 const router = require("express").Router();
 const axios = require("axios");
+
+
 /**
  * Activity - Read All
  */
@@ -24,8 +26,9 @@ router.get("/:id", function (req, res) {
  * Notice how we are also taking in the User Id! Important!
  */
 router.post("/", function (req, res) {
+
     //get lat long from zip
-    let geoURL = "https://api.openweathermap.org/data/2.5/weather?zip=" + req.body.zip +",us&appid=93d3ded8310f4bcd0816861f0428d0f8";
+    let geoURL = "https://api.openweathermap.org/data/2.5/weather?zip=" + req.body.zip + ",us&appid=93d3ded8310f4bcd0816861f0428d0f8";
 
     axios.get(geoURL).then(response => {
         // get lat long from data
@@ -40,10 +43,21 @@ router.post("/", function (req, res) {
             ...req.body
         })
             .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err));
-    });
+            .catch(err =>
+                res.status(422).json(err.response)
+            );
+
+
+    }).catch(err => {
+        if (err.response) {
+            // client received an error response 
+        } else if (err.request) {
+            // client never received a response, or request never left
+        } else {
+            // anything else
+        }
     })
-    
+})
 
 /**
  * Activity - Update

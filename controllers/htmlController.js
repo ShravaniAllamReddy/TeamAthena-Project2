@@ -24,7 +24,7 @@ router.get("/home", function(req, res) {
  */
 router.get("/signup", function(req, res) {
   if (req.user) {
-    res.redirect("/");
+    res.redirect("/user");
   } else {
     res.render("signup", { user: req.user });
   }
@@ -42,7 +42,7 @@ router.get("/login", function(req, res) {
 });
 
 /**
- * Forum Page - 
+ * Activity Page - 
  * Notice loading our Activities, with that include!
  */
 router.get("/activity", isAuthenticated, function(req, res) {
@@ -53,15 +53,14 @@ router.get("/activity", isAuthenticated, function(req, res) {
     .catch(err => res.status(422).json(err));
 });
 
-
+// to get the user profile information
 router.get("/user",isAuthenticated, function(req, res) {
   
     res.render("user", { user: req.user });
   
 });
 
-
-
+// to get the all the activities posted by different users
 router.get("/current", isAuthenticated, function(req, res) {
   db.Activity.findAll({ raw: true, include: [db.User] }) // Joins User to Activities! And scrapes all the seqeulize stuff off
     .then(dbModel => {

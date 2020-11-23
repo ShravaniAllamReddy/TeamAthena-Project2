@@ -2,36 +2,31 @@
 
 
 <div class="container">
-    <div class="row">
-        <div class="col-md">
-            <div class="jumbotron">
-                <h4 class="display-5 text-center">Hello, {{user.firstname}}!</h4>
-            </div>
-        </div>
-    </div>
+
     <div class="row">
 
-        <div class="col-md4">
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="card user mt-5" style="width: 400px;">
 
-            <div id="users">
+                <div class="card-header" id="users">
+                    <h2 style="color: rgb(77, 0, 128);"> Your Information</h2>
+                </div>
 
-                <div class="card mb-3"  style="width: 400px;">
+                <div class="card-body">
+                    <p class="card-text color">Contact Number: {{user.phone}}</p>
+                    <p class="card-text color">Email : {{user.email}}</p>
+                    <p class="card-tex color">Age : {{user.age}}</p>
+                    <p class="card-text color">Gender: {{user.gender}}</p>
 
-                    <div class="card-body">
-                        <p class="card-text">Contact Number: {{user.phone}}</p>
-                        <p class="card-text">Email : {{user.email}}</p>
-                        <p class="card-text">Age : {{user.age}}</p>
-                        <p class="card-text">Gender: {{user.gender}}</p>
-
-                        <br>
-                        @ {{user.createdAt}}
-                    </div>
-
+                    <br><br><br><br><br><br>
+                   <div class="color mt-5">@ {{user.createdAt}}</div>
                 </div>
 
             </div>
+
         </div>
-
-
     </div>
+
+
+</div>
 </div>

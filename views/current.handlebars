@@ -1,71 +1,52 @@
 {{> navbar user}}
 
-<div class="container">
-    <div class="row">
-        <div class="col-md">
-            <div class="jumbotron">
-                <h4 class="display-6">Hello, {{user.firstname}}!</h4>
-            </div>
-        </div>
+<div class="container-fluid">
+    <div id="ml" style="color: rgb(18, 2, 119);">
+        <h2>Hello {{user.firstname}} </h2>
     </div>
-    <div class="row">
-        <div class="col-md-4">
-            <legend>Fun things to do</legend>
+    <div class="row mt-5">
+        <div class="col-md-4 col-lg-4 col-sm-8">
 
-            <div id="activities">
+            <div id="activities" class="activity">
+                <legend class="display-5" style="color: rgb(80, 28, 122);font-weight:bold">Fun things to do</legend>
                 {{#each activities}}
-                <div class="activities-card card text-white bg-primary mb-3">
-                    <div class="card-header">
-                        <h4 class="text-white">{{name}}</h4>
 
-                    </div>
-                    <button class="button">Show/Hide</button>
-                    <div class="card-body hidden">
-                        <p class="card-text">{{description}}</p>
+                <div class="activities-card mt-3">
 
-                        <p class="card-text">{{street}}</p>
+                    <h4 style="color: rgb(55, 2, 77);font-size:large">{{name}}</h4>
+                    {{description}}
 
-                        <p class="card-text">{{state}}</p>
-
-                        <p class="card-text">{{city}}</p>
-
-                        <p class="card-text">{{zip}}</p>
-                        <br>
-                        by {{'User.email'}}
-                        @ {{createdAt}}
+                    <div>
+                        <h5 style="font-weight: bold;">Location:</h5>
+                        <p>{{street}}, {{state}}, {{city}}, {{zip}}</p>
                     </div>
 
-
+                    by {{'User.firstname'}}, Contact: {{'User.phone'}}
+                    @ {{createdAt}}
                 </div>
                 {{/each}}
+
             </div>
+
         </div>
         <div class="col-md-8">
-            <div id="map"></div>
-        </div>
+            <div id="map">
 
+            </div>
+        </div>
     </div>
 
 
-
-
 </div>
 
 
-
-</div>
-</div>
-<script src="https://www.gstatic.com/firebasejs/5.8.6/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.8.6/firebase-database.js"></script>
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDq70sJV45glTCIzAG9zL_ookT7DaKmP8&callback=initMap"></script>
 <script>
 
     let geoAPIKey = "93d3ded8310f4bcd0816861f0428d0f8";
-
-
     // Initialize and add the map
-    function initMap() {
+     function initMap() {
         var center = {lat: 41.8781, lng: -87.6298};
         $.ajax({
             url: "http://localhost:8080/api/activities",
@@ -106,75 +87,4 @@
         })
     };
 
-
-</script>
-<script>
-    $(document).ready(function () {
-        // Getting references to our form and inputs
-
-        const postForm = $("form.activities");
-
-        const titleInput = $("input#title-input");
-        const bodyInput = $("textarea#body-input");
-        const streetInput = $("input#street_id");
-        const stateInput = $("select#state_id");
-        const cityInput = $("input#city_id");
-        const zipInput = $("input#zip_id");
-
-        // When the form is submitted, we validate there's a title and body entered
-        postForm.on("submit", function (event) {
-            event.preventDefault();
-            console.log(bodyInput.val(), titleInput.val())
-            var postData = {
-                name: titleInput.val().trim(),
-                description: bodyInput.val().trim(),
-                street: streetInput.val().trim(),
-                state: stateInput.val().trim(),
-                city: cityInput.val().trim(),
-                zip: zipInput.val().trim()
-            };
-
-            if (!postData.name || !postData.description || !postData.street || !postData.state ||
-                !postData.city || !postData.zip) {
-                return;
-            }
-
-
-            // If we have a title and password  we run the sendPost function and clear the form
-            sendPost(postData.name, postData.description, postData.street, postData.state, postData.city, postData.zip);
-            titleInput.val("");
-            bodyInput.val("");
-            streetInput.val("");
-            stateInput.val("");
-            cityInput.val("");
-            zipInput.val("");
-
-        });
-
-        // sendPost does a post to our "api/posts" route and if successful, redirects us the the activities page
-        function sendPost(name, description, url) {
-
-            $.post("/api/activities", {
-                name: name,
-                description: description,
-                street: street,
-                state: state,
-                city: city,
-                zip: zip
-            })
-                .then(function () {
-                    window.location.replace("/activity");
-                    // If there's an error, log the error
-                })
-                .catch(function (err) {
-                    console.log(err);
-                });
-
-        }
-
-
-        $('.button').on('click', function (e) {
-            $('.hidden').toggle();
-        });
-    })
 </script>

@@ -1,3 +1,58 @@
+.navbar-nav > li{
+
+    margin-left:120px;
+    margin-right:120px;
+    font-size: large;
+
+}
+
+
+body {
+  background-image: url("/images/bored.jpg"); 
+  background-repeat: no-repeat; 
+  background-size: cover; 
+  background-attachment: fixed;
+  background-position: center;
+}
+
+.login {
+  max-width: 400px;
+  margin: auto;
+  background-color: rgba(24, 147, 163, 0.331);
+  padding: 30px;
+  border: transparent solid 2px;
+  border-radius: 20px;
+
+}
+
+.color{
+ 
+ font-weight: bold;
+ font-size: large;
+}
+.user {
+  max-width: 600px;
+  min-height:600px;
+  margin: auto;
+  background-color: rgb(216, 163, 198);
+  padding: 30px;
+  border: transparent solid 3px;
+  border-radius: 20px;
+}
+
+#ml{
+ margin-left: 70px;
+}
+.activity {
+  max-width: 500px;
+  margin: auto;
+  background-color: rgb(216, 163, 198);
+  padding: 30px;
+  border: transparent solid 3px;
+  border-radius: 20px;
+}
+
+
 form.signup,
 form.login {
   margin-top: 50px;
