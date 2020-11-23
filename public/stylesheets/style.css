@@ -1,14 +1,16 @@
 .navbar-nav > li{
 
-    margin-left:120px;
-    margin-right:120px;
+    margin-left:50px;
+    margin-right:60px;
     font-size: large;
 
 }
 
-
+.bold{
+   font-weight: bold;
+}
 body {
-  background-image: url("/images/bored.jpg"); 
+  background-image: url("/images/party.jpg"); 
   background-repeat: no-repeat; 
   background-size: cover; 
   background-attachment: fixed;
@@ -26,10 +28,12 @@ body {
 }
 
 .color{
- 
+ color:white;
  font-weight: bold;
  font-size: large;
 }
+
+
 .user {
   max-width: 600px;
   min-height:600px;

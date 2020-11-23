@@ -26,7 +26,7 @@ router.get("/:id", function (req, res) {
  * Notice how we are also taking in the User Id! Important!
  */
 router.post("/", function (req, res) {
-
+    // console.log(req.body, req.user.id);
     //get lat long from zip
     let geoURL = "https://api.openweathermap.org/data/2.5/weather?zip=" + req.body.zip + ",us&appid=93d3ded8310f4bcd0816861f0428d0f8";
 
@@ -36,26 +36,18 @@ router.post("/", function (req, res) {
         console.log(data);
         const lat = data.coord.lat;
         const lon = data.coord.lon;
-        db.Activity.create({
-            UserId: req.user.id,
-            lat: lat,
-            lon: lon,
-            ...req.body
-        })
-            .then(dbModel => res.json(dbModel))
-            .catch(err =>
-                res.status(422).json(err.response)
-            );
+        req.body.UserId = req.user.id;
+        req.body.lat = lat;
+        req.body.lon = lon;
+        console.log(req.body);
 
+        db.Activity.create(req.body)
+            .then(dbModel => {
+                console.log(dbModel);
+                res.json(dbModel)
+            })
+            .catch(err => res.status(422).json(err));
 
-    }).catch(err => {
-        if (err.response) {
-            // client received an error response 
-        } else if (err.request) {
-            // client never received a response, or request never left
-        } else {
-            // anything else
-        }
     })
 })
 

@@ -1,28 +1,28 @@
 {{> navbar user}}
 
 <div class="container-fluid">
-    <div id="ml" style="color: rgb(18, 2, 119);">
-        <h2>Hello {{user.firstname}} </h2>
+    <div id="ml">
+        <h2 style="color: white;">Hello {{user.firstname}} </h2>
     </div>
     <div class="row mt-5">
         <div class="col-md-4 col-lg-4 col-sm-8">
 
-            <div id="activities" class="activity">
-                <legend class="display-5" style="color: rgb(80, 28, 122);font-weight:bold">Fun things to do</legend>
+            <div id="activities" class="activity bg-secondary">
+                <legend style="color: black;font-weight:bold;font-size:x-large">Fun Activities:</legend>
                 {{#each activities}}
 
                 <div class="activities-card mt-3">
 
-                    <h4 style="color: rgb(55, 2, 77);font-size:large">{{name}}</h4>
-                    {{description}}
+                    <h4 style="color:black;font-size:x-large;font-weight:bold">{{name}}</h4>
+                    <p style="color: black;">{{description}}</p>
 
                     <div>
-                        <h5 style="font-weight: bold;">Location:</h5>
-                        <p>{{street}}, {{state}}, {{city}}, {{zip}}</p>
+                        <h5 style="color:black;font-weight:bold;font-size:medium">Location:</h5>
+                        <p style="color: black;">{{street}}, {{state}}, {{city}}, {{zip}}</p>
                     </div>
 
-                    by {{'User.firstname'}}, Contact: {{'User.phone'}}
-                    @ {{createdAt}}
+                   <p style="color:black">by {{'User.firstname'}}, Contact: {{'User.phone'}}
+                    @ {{createdAt}} </p>
                 </div>
                 {{/each}}
 
@@ -47,9 +47,9 @@
     let geoAPIKey = "93d3ded8310f4bcd0816861f0428d0f8";
     // Initialize and add the map
      function initMap() {
-        var center = {lat: 41.8781, lng: -87.6298};
+     
         $.ajax({
-            url: "http://localhost:8080/api/activities",
+            url: '/api/activities',
             method: "GET"
         }).then(function (activityresponse) {
             console.log(activityresponse);
@@ -64,22 +64,22 @@
                 activityArray.push(activity.lon);
                 locations.push(activityArray)
             })
-           
+            var center = { lat : parseFloat(activityresponse[0].lat),lng: parseFloat(activityresponse[0].lon)};
             var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 9,
                 center: center
             });
             var infowindow = new google.maps.InfoWindow({});
             var marker, count;
-            for (count = 0; count < locations.length; count++) {
+            for (count = 0; count < activityresponse.length; count++) {
                 marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(locations[count][1], locations[count][2]),
+                    position: new google.maps.LatLng(activityresponse[count].lat, activityresponse[count].lon),
                     map: map,
-                    title: locations[count][0]
+                    title: activityresponse[count].name
                 });
                 google.maps.event.addListener(marker, 'click', (function (marker, count) {
                     return function () {
-                        infowindow.setContent(locations[count][0]);
+                        infowindow.setContent(activityresponse[count].name);
                         infowindow.open(map, marker);
                     }
                 })(marker, count));
