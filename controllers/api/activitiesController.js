@@ -50,11 +50,11 @@ router.post("/", function (req, res) {
 
     }).catch(err => {
         if (err.response) {
-          // client received an error response (5xx, 4xx)
+            // client received an error response 
         } else if (err.request) {
-          // client never received a response, or request never left
+            // client never received a response, or request never left
         } else {
-          // anything else
+            // anything else
         }
     })
 })
