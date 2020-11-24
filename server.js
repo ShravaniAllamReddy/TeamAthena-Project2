@@ -9,7 +9,7 @@ const axios = require("axios");
 const passport = require("./config/passport");
 
 // Requiring our routes
-const routes = require("./controllers");
+const routes = require("./controllers");`~`
 
 // Setting up port and requiring models for syncing
 const PORT = process.env.PORT || 8080;
