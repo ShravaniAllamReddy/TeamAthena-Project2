@@ -1,5 +1,7 @@
-# LuuLuu Amici - app
+# LuuLuu Amici - app 
 A simple app for bored friends to find activities together using node.js, MySQL, and Handlebars.
+
+## Live Application Link: https://ournewproject2.herokuapp.com/
 
 ## Table of contents
 * [General info](#general-info)
