@@ -56,6 +56,14 @@ body {
   border-radius: 20px;
 }
 
+.currentactivity {
+  max-width: 600px;
+  margin: auto;
+  background-color: rgb(216, 163, 198);
+  padding: 30px;
+  border: transparent solid 3px;
+  border-radius: 20px;
+}
 
 form.signup,
 form.login {
